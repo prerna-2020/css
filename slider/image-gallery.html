@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Gallery</title>
+    <style>
+      * {
+        margin: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        position: relative;
+      }
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+      h2 {
+        text-align: center;
+        margin: 20px;
+      }
+      .img-container {
+        column-count: 4;
+        column-gap: 15px;
+        padding: 15px;
+      }
+      .img-container > img {
+        width: 100%;
+        height: auto;
+        border-radius: 6px;
+        margin-bottom: 15px;
+        cursor: pointer;
+      }
+      .overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: white;
+        opacity: 0.6;
+      }
+      .imageModal {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 700px;
+        height: 550px;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        margin: 0 auto;
+        padding: 20px;
+        border-radius: 6px;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+      .imageModal img {
+        max-width: 50%;
+        height: auto;
+      }
+      #imageHolder {
+        text-align: center;
+      }
+      .closeModal {
+        border: 1px solid #e5e1e1;
+        position: absolute;
+        right: -15px;
+        top: -15px;
+        width: 35px;
+        height: 35px;
+        text-align: center;
+        background: white;
+        font-size: 22px;
+        line-height: 35px;
+        color: #817e7e;
+        border-radius: 50%;
+        cursor: pointer;
+        box-shadow: 0px 0px 2px #e5e1e1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Responsive Image Gallery Masonry Design</h2>
+
+      <div class="img-container">
+        <img src="images/img.jpg" alt="Image 1" />
+        <img src="images/img2.jpg" alt="Image 2" />
+        <img src="images/img3.jpg" alt="Image 3" />
+        <img src="images/img4.jpg" alt="Image 4" />
+        <img src="images/img5.jpg" alt="Image 5" />
+        <img src="images/img6.jpg" alt="Image 6" />
+        <img src="images/img7.jpg" alt="Image 7" />
+        <img src="images/img8.jpg" alt="Image 8" />
+        <img src="images/img9.jpg" alt="Image 9" />
+        <img src="images/img10.jpg" alt="Image 10" />
+        <img src="images/img11.jpg" alt="Image 11" />
+        <img src="images/img12.jpg" alt="Image 12" />
+        <img src="images/img13.jpg" alt="Image 13" />
+        <img src="images/img14.jpg" alt="Image 14" />
+        <img src="images/img15.jpg" alt="Image 15" />
+        <img src="images/img16.jpg" alt="Image 16" />
+        <img src="images/img17.jpg" alt="Image 17" />
+        <img src="images/img18.jpg" alt="Image 18" />
+        <img src="images/img19.jpg" alt="Image 19" />
+        <img src="images/img20.jpg" alt="Image 20" />
+      </div>
+
+      <div class="overlay" id="overlay"></div>
+      <div class="imageModal" id="imageModal">
+        <div class="closeModal" id="closeModal">&#10005;</div>
+        <div id="imageHolder"></div>
+      </div>
+    </div>
+
+    <script>
+      let imgList = document.querySelectorAll(".img-container img");
+      let imageModal = document.getElementById("imageModal");
+      let imageHolder = document.getElementById("imageHolder");
+      let overlay = document.getElementById("overlay");
+
+      imgList.forEach((item, key) => {
+        item.addEventListener("click", () => {
+          let createImg = `<img src='${item.getAttribute(
+            "src"
+          )}' alt='Image ${key}' />`;
+          console.log(item.getAttribute("src"));
+          imageHolder.innerHTML = createImg;
+
+          overlay.style.display = "block";
+          imageModal.style.display = "flex";
+        });
+      });
+
+      let closeIcon = document.getElementById("closeModal");
+      closeIcon.addEventListener("click", () => {
+        imageModal.style.display = "none";
+        imageHolder.innerHTML = "";
+        overlay.style.display = "none";
+      });
+    </script>
+  </body>
+</html>
